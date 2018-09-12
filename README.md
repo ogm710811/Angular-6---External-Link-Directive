@@ -1,27 +1,42 @@
 # ExternalLinkDirective
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.4.
+This project creates an anchor directive that targets every external link in our template. We’ll see how we can:
 
-## Development server
+1. Target native HTML elements
+2. Ex clude elements by use the :not pseudo-class.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Case Study
 
-## Code scaffolding
+If you have ever created an Angular directive before, you probably used the brackets ([]) notation as a selector.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Most of the time it’s the preferred way, but it’s not a requirement. Actually, you can get pretty creative with the selectors used in your directives.
 
-## Build
+To emphasize this, we’ll create an anchor directive that targets every external link in our template. We’ll see how we can:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+1. Target native HTML elements
+2. Exclude elements by use the :not pseudo-class.
 
-## Running unit tests
+## Few things to highlight
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- You can target more than one selector by separate each selector with a comma
+- You can mix targeting HTML elements (like <form>) with HTML attributes (like ngForm)
+- You can use the :not pseudo-class to exclude some elements
 
-## Running end-to-end tests
+### Example
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+@Directive({
+selector: 'form:not([ngNoForm]):not([formGroup]),ngForm,ng-form,[ngForm]',
+})
 
-## Further help
+## How to create the External Link Directive
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+We define the external link as any anchor tag that doesn’t already have the routerLink directive.
+The directive should do the following:
+
+1. Open the link in a separate window
+2. Add the rel attribute to improve performance and prevent security vulnerabilities
+
+## Sumary
+
+You don’t have to use the attribute selector when working with Angular directives.
+We’ve examined the ngForm directive, and used it as an example to implement our own custom external link directive.
